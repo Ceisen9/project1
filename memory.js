@@ -1,7 +1,7 @@
-turns = 0;
-clicks = 0;
+var turns = 0;
+var clicks = 0;
 
-memory = {
+var memory = {
   deck1: [],
   deck2: [],
   shuffleDeck: [],
@@ -72,30 +72,39 @@ memory = {
     // game handler. Tells the cards to remain flipped if they are successfully matched
     // checks if clicked cards are a match and flips them back over if not
     // also increments turn counter
+    //get no-repeat clicks working
+    //smelly code - break into more functions
+    //put in timer function
+    //remove event listener after clikc
     if(memory.exposed.length < memory.shuffleDeck.length) {
       clicks = 1;
-      if ( memory.exposed[memory.exposed.length - 2].num === memory.exposed[memory.exposed.length - 3].num && memory.exposed[memory.exposed.length - 2].attr != memory.exposed[memory.exposed.length - 3].attr) {
+      var card1 = memory.exposed[memory.exposed.length - 3]
+      var card2 = memory.exposed[memory.exposed.length - 2]
+      if ( card1.num === card2.num && card1.attr != card2.attr) {
           // console.log("match!");
           this.correctMatch();
         } else {
-          memory.cardSelector[memory.exposed[memory.exposed.length - 2].attr].innerHTML="";
-          memory.cardSelector[memory.exposed[memory.exposed.length - 3].attr].innerHTML="";
-          memory.exposed.shift();
-          memory.exposed.shift();
-          // console.log(memory.exposed);
-          // console.log("no match!");
+          this.notAMatch(card1,card2);
         }
       }
-      if (memory.exposed.length === 17) {
-        this.correctMatch();
-        document.querySelector('.container').style.backgroundImage = "url(http://i.imgur.com/Vp9Q38k.gif)";
-        console.log("you win");
-      }
-
+      this.gameEnd()
   },
   correctMatch: function(){
-    var card1 =   memory.cardSelector[memory.exposed[memory.exposed.length - 2].attr];
-    var card2 =   memory.cardSelector[memory.exposed[memory.exposed.length - 3].attr];
+    var card1 = memory.cardSelector[memory.exposed[memory.exposed.length - 2].attr];
+    var card2 = memory.cardSelector[memory.exposed[memory.exposed.length - 3].attr];
+    this.makeTransparent(card1,card2);
+  },
+  notAMatch: function(card1,card2) {
+    memory.cardSelector[card1.attr].innerHTML="";
+    memory.cardSelector[card2.attr].innerHTML="";
+    memory.exposed.shift();
+    memory.exposed.shift();
+  },
+  turnsIncrementer: function () {
+    turns++;
+    document.querySelector(".turns").textContent = ("Turns: " + turns);
+  },
+  makeTransparent: function(card1,card2){
     card1.style.backgroundColor = 'transparent';
     card1.style.color = 'transparent';
     card1.style.textShadow = 'none';
@@ -103,9 +112,11 @@ memory = {
     card2.style.color = 'transparent';
     card2.style.textShadow = 'none';
   },
-  turnsIncrementer: function () {
-    turns++;
-    document.querySelector(".turns").textContent = ("Turns: " + turns);
+  gameEnd: function () {
+    if (memory.exposed.length === 17) {
+      this.correctMatch();
+      document.querySelector('.container').style.backgroundImage = "url(http://i.imgur.com/Vp9Q38k.gif)";
+    }
   },
   runMemory: function(){
     // initializes game

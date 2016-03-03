@@ -2,43 +2,10 @@ body,figure{
   margin:0;
 }
 
-/* Box-sizing border-box */
 * {
   box-sizing: border-box;
 }
 
-/* Some default styles to make each box visible */
-.box {
-  color:white;
-  font-size: 50px;
-  text-align: center;
-  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
-  padding:10px;
-}
-
-/* Colours for each box */
-.box1 { background:#011638;}
-.box2 { background:#9055A2;}
-.box3 { background:#9055A2;}
-.box4 { background:#9055A2;}
-.box5 { background:#9055A2;}
-.box6 { background:#9055A2;}
-.box7 { background:#9055A2;}
-.box8 { background:#9055A2;}
-.box9 { background:#9055A2;}
-.box10 { background:#9055A2;}
-.box11 { background:#9055A2;}
-.box12 { background:#9055A2;}
-.box13 { background:#9055A2;}
-.box14 { background:#9055A2;}
-.box15 { background:#9055A2;}
-.box16 { background:#9055A2;}
-.box17 { background:#9055A2;}
-.box18 { background:#011638;}
-
-
-
-/* We start writing out flexbox here. The above is just page setup */
 .container {
   display:flex;
   flex-wrap: wrap;
@@ -51,6 +18,11 @@ body,figure{
 }
 
 .box {
+  color:white;
+  font-size: 50px;
+  text-align: center;
+  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+  padding:10px;
   flex-grow: 1;
   flex-shrink: 1;
   width: 24%;
@@ -63,6 +35,7 @@ body,figure{
   border-radius: 10%;
   min-height: 150px;
   font-size: 100px;
+  background:#9055A2;
 }
 
 .box1, .box18{
@@ -70,6 +43,7 @@ body,figure{
   font-size: 15px;
   /*border: 1px solid blue;*/
   margin: 0;
+  background:#011638;
 }
 
 .box1 {
@@ -78,11 +52,16 @@ body,figure{
   font-family: 'Londrina Shadow', cursive;
   max-height: 150px;
 }
+
+.turns {
+  font-size: 40px;
+}
+
 .box18 {
   margin-top: 1px;
   max-height: 20px;
   align-self: flex-end;
-}
-.turns {
-  font-size: 40px;
+  font-size: 10px;
+  color: "white";
+  line-height: 5px;
 }
